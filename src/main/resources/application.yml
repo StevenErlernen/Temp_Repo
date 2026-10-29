@@ -1,0 +1,33 @@
+server:
+  port: 8080
+  error:
+    include-message: never
+spring:
+  application:
+    name: black-money-api
+  datasource:
+    url: ${DB_URL:jdbc:db2://localhost:50000/BLKMONEY}
+    username: ${DB_USERNAME:db2user}
+    password: ${DB_PASSWORD:change-me}
+    driver-class-name: com.ibm.db2.jcc.DB2Driver
+  jpa:
+    open-in-view: false
+    hibernate:
+      ddl-auto: validate
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.DB2Dialect
+  servlet:
+    multipart:
+      max-file-size: 50MB
+      max-request-size: 200MB
+app:
+  storage:
+    root: ${FILE_STORAGE_ROOT:./uploads}
+  allowed-extensions: jpg,jpeg,png,doc,docx,pdf,xls,xlsx,zip,rar
+  max-file-size-bytes: 52428800
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info
